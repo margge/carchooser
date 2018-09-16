@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CarChooser</string>
+    <string name="server_error">Connection error</string>
     <string name="manufacturer">Manufacturer</string>
     <string name="model">Model</string>
     <string name="year">Year</string>
+    <string name="please_select_the_manufacturer_model_year">Please select the manufacturer, model and year to see a car</string>
 </resources>

@@ -5,4 +5,4 @@ import com.google.gson.annotations.SerializedName
 data class Manufacturer(val page: Int,
                         val pageSize: Int,
                         val totalPageCount: Int,
-                        @SerializedName("wkda") val manufacturersList: List<Pair<String, String>>)
+                        @SerializedName("wkda") val manufacturersMap: HashMap<String, String>)

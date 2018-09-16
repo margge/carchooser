@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default Screen Margins -->
+    <dimen name="activity.margin.horizontal">16dp</dimen>
+    <dimen name="activity.margin.vertical">16dp</dimen>
+
+    <!-- Sizes for Padding/Margin/Space -->
+    <dimen name="none">0dp</dimen>
+    <dimen name="line">1dp</dimen>
+    <dimen name="double_line">2dp</dimen>
+    <dimen name="tiny">3dp</dimen>
+    <dimen name="smallest">5dp</dimen>
+    <dimen name="smaller">10dp</dimen>
+    <dimen name="small">15dp</dimen>
+    <dimen name="medium">20dp</dimen>
+    <dimen name="normal">25dp</dimen>
+    <dimen name="large">30dp</dimen>
+    <dimen name="larger">35dp</dimen>
+    <dimen name="largest">40dp</dimen>
+    <dimen name="big">60dp</dimen>
+    <dimen name="bigger">80dp</dimen>
+    <dimen name="biggest">120dp</dimen>
+
+    <!-- font sizes -->
+    <dimen name="font_biggest">34sp</dimen>
+    <dimen name="font_bigger">31sp</dimen>
+    <dimen name="font_big">28sp</dimen>
+    <dimen name="font_largest">25sp</dimen>
+    <dimen name="font_larger">22sp</dimen>
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_medium">17sp</dimen>
+    <dimen name="font_normal">15sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+
+    <!-- custom sizes -->
+    <dimen name="icon_image_size">70dp</dimen>
+    <dimen name="gif_detail_height">200dp</dimen>
+    <dimen name="gif_detail_width">330dp</dimen>
+
+</resources>

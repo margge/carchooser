@@ -18,24 +18,77 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            android:layout_margin="10dp"
+            android:text="@string/please_select_the_manufacturer_model_year"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.085" />
+            app:layout_constraintVertical_bias="0.100" />
+
+        <Button
+            android:id="@+id/manufacturesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="356dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:onClick="@{()->mainViewModel.getCarManufacturers()}"
+            android:text="@string/manufacturer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="260dp"
+            android:layout_marginBottom="284dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:onClick="@{()->mainViewModel.getManufacturers()}"
-            android:text="@string/manufacturer"
+            android:onClick="@{()->mainViewModel.getCarModels()}"
+            android:text="@string/model"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="220dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:onClick="@{()->mainViewModel.getCarYears()}"
+            android:text="@string/year"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/selectedCar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@{mainViewModel.mLastSelectedCar}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button"
+            tools:text="Citroen, 2 CV, 1984" />
+
+        <TextView
+            android:id="@+id/previousSearches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="@{mainViewModel.mLastSearches}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectedCar"
+            tools:text="Citroen, 2 CV, 1984" />
 
     </android.support.constraint.ConstraintLayout>
 

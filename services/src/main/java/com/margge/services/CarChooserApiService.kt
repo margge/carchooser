@@ -1,5 +1,6 @@
 package com.margge.services
 
+import com.margge.services.models.BuildDate
 import com.margge.services.models.MainType
 import com.margge.services.models.Manufacturer
 import io.reactivex.Observable
@@ -27,7 +28,7 @@ interface CarChooserApiService {
                       @Query("page") page: Int = 0,
                       @Query("pageSize") pageSize: Int = 0,
                       @Query("manufacturer") manufacturer: String,
-                      @Query("main-type") mainType: String): Observable<MainType>
+                      @Query("main-type") mainType: String): Observable<BuildDate>
 
     companion object {
 
