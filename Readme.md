@@ -12,7 +12,7 @@ The structure of the project is based on the [Google Android Architecture](https
 * The project uses native Android ViewModel, it allows data to survive configuration changes such as screen rotations.
 * It also uses data binding for the communication between layout (XML) and ViewModels.
 * LiveData is used for handling communication between activities and ViewModels through events. 
-* Services package will be responsible for the communication with Jokes API services.
+* Services package will be responsible for the communication with API services.
 
 ### Language and principal tools
 
