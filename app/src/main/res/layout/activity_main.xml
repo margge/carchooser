@@ -67,13 +67,14 @@
             android:layout_marginBottom="284dp"
             android:layout_marginEnd="@dimen/margin_medium"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="8dp"
             android:onClick="@{()->mainViewModel.getCarModels()}"
             android:text="@string/model"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.833"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manufacturesButton" />
 
         <Button
             android:id="@+id/yearsButton"
@@ -83,13 +84,15 @@
             android:layout_marginBottom="224dp"
             android:layout_marginEnd="@dimen/margin_medium"
             android:layout_marginStart="@dimen/margin_medium"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="8dp"
             android:onClick="@{()->mainViewModel.getCarYears()}"
             android:text="@string/year"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.833"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.714"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modelsButton"
+            app:layout_constraintVertical_bias="0.851" />
 
         <View
             android:id="@+id/separatorButtonView"
