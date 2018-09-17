@@ -27,10 +27,7 @@ http://square.github.io/retrofit/
 
 ### Screens
 
-Portrait views
 ![Screen One](images/ScreenOne.png)
 ![Screen Two](images/ScreenThree.png)
-
-Landscape views
 ![Screen Two](images/ScreenTwo.png)
 ![Screen Two](images/ScreenFour.png)
