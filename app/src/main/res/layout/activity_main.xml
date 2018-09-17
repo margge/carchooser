@@ -13,82 +13,135 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/medium"
+        android:paddingRight="@dimen/medium"
         tools:context="com.margge.carchooser.ui.main.MainActivity">
 
         <TextView
+            android:id="@+id/mainViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:fontFamily="@font/raleway_medium"
+            android:gravity="center"
             android:text="@string/please_select_the_manufacturer_model_year"
+            android:textSize="@dimen/font_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.100" />
 
+        <View
+            android:id="@+id/separatorView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line"
+            android:layout_marginTop="@dimen/smaller"
+            android:background="@color/lightGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mainViewTitle" />
+
         <Button
             android:id="@+id/manufacturesButton"
-            android:layout_width="wrap_content"
+            style="@style/CarChooserButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="356dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="332dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:onClick="@{()->mainViewModel.getCarManufacturers()}"
             android:text="@string/manufacturer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/separatorView" />
 
         <Button
-            android:layout_width="wrap_content"
+            android:id="@+id/modelsButton"
+            style="@style/CarChooserButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="284dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:onClick="@{()->mainViewModel.getCarModels()}"
             android:text="@string/model"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.833"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
+            android:id="@+id/yearsButton"
+            style="@style/CarChooserButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="220dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginBottom="224dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
             android:onClick="@{()->mainViewModel.getCarYears()}"
             android:text="@string/year"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.833"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <View
+            android:id="@+id/separatorButtonView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line"
+            android:layout_marginTop="@dimen/smaller"
+            android:background="@color/lightGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearsButton" />
 
         <TextView
             android:id="@+id/selectedCar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="@dimen/smaller"
+            android:fontFamily="@font/raleway_medium"
             android:text="@{mainViewModel.mLastSelectedCar}"
+            android:textSize="@dimen/font_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/separatorButtonView"
             tools:text="Citroen, 2 CV, 1984" />
 
-        <TextView
-            android:id="@+id/previousSearches"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/smaller"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:text="@{mainViewModel.mLastSearches}"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.833"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectedCar"
-            tools:text="Citroen, 2 CV, 1984" />
+            tools:text="Car: Citroen, 2 CV, 1984">
+
+            <TextView
+                android:id="@+id/previousSearches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:text="@{mainViewModel.mLastSearches}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.833"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selectedCar"
+                tools:text="Car: Citroen, 2 CV, 1984" />
+
+        </ScrollView>
 
     </android.support.constraint.ConstraintLayout>
 

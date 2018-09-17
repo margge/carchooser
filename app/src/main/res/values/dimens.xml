@@ -34,8 +34,7 @@
     <dimen name="font_small">12sp</dimen>
 
     <!-- custom sizes -->
-    <dimen name="icon_image_size">70dp</dimen>
-    <dimen name="gif_detail_height">200dp</dimen>
-    <dimen name="gif_detail_width">330dp</dimen>
+    <dimen name="icon_image_size">40dp</dimen>
+    <dimen name="margin_medium">6dp</dimen>
 
 </resources>

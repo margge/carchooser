@@ -96,10 +96,10 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 mSharedPrefHelper.put(LAST_CAR_YEAR, selectedData.second)
 
                 mSharedPrefHelper.put(SharedPrefHelper.LAST_SEARCHES, mSharedPrefHelper[LAST_SELECTED_CAR, ""] +
-                        " ${mSharedPrefHelper[SharedPrefHelper.LAST_SEARCHES, ""]} \n")
+                        "${mSharedPrefHelper[SharedPrefHelper.LAST_SEARCHES, ""]} \n")
 
-                mSharedPrefHelper.put(LAST_SELECTED_CAR, "Car: \n ${mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""]} , " +
-                        "${mSharedPrefHelper[LAST_CAR_MODEL, ""]} , " +
+                mSharedPrefHelper.put(LAST_SELECTED_CAR, "Car: \n ${mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""]}, " +
+                        "${mSharedPrefHelper[LAST_CAR_MODEL, ""]}, " +
                         "${mSharedPrefHelper[LAST_CAR_YEAR, ""]} \n")
             }
         }
