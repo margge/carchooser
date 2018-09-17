@@ -28,6 +28,4 @@ class SharedPrefHelper @Inject constructor(private val mSharedPreferences: Share
     operator fun get(key: String, defaultValue: Float): Float = mSharedPreferences.getFloat(key, defaultValue)
 
     fun get(key: String, defaultValue: Boolean): Boolean = mSharedPreferences.getBoolean(key, defaultValue)
-
-    fun deleteSavedData(key: String) = mSharedPreferences.edit().remove(key).apply()
 }

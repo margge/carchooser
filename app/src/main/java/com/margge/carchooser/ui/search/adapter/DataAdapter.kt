@@ -77,13 +77,10 @@ class DataAdapter(private val activity: FragmentActivity,
 
             if (constraint != null && constraint.isNotEmpty()) {
 
-                val filteredList: MutableList<Pair<String, String>> = mutableListOf()
+                val filteredList: MutableList<Pair<String, String>> = mOriginalDataList
+                        .filter { it.second.toLowerCase().startsWith(constraint.toString().toLowerCase()) }
+                        .toMutableList()
 
-                for (country in mOriginalDataList) {
-                    if (country.second.toLowerCase().startsWith(constraint.toString().toLowerCase())) {
-                        filteredList.add(country)
-                    }
-                }
                 results.count = filteredList.size
                 results.values = filteredList
             } else {
