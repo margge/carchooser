@@ -74,7 +74,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 Event.EventsType.SelectedItem -> {
                     val selectedData: Pair<String, String> = event.data as Pair<String, String>
                     mSearchViewModel.saveSelectedData(mDataType, selectedData)
-                    launchActivity(MainActivity::class.java)
+                    launchActivity<MainActivity>()
                 }
 
                 Event.EventsType.ConnectionError -> showToast(getString(R.string.server_error))

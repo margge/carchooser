@@ -1,5 +1,6 @@
 package com.margge.carchooser.extensions
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -10,5 +11,5 @@ import android.widget.Toast
 fun AppCompatActivity.showToast(message: String) =
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-fun AppCompatActivity.launchActivity(cls: Class<*>) =
-        startActivity(Intent(this, cls))
+inline fun <reified T : Activity> Activity.launchActivity() =
+        startActivity(Intent(this, T::class.java))
