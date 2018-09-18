@@ -55,6 +55,9 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 .subscribe({ result ->
                     mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
                             result.manufacturersMap.toList().sortedBy { it.second }))
+
+                    mSharedPrefHelper.put(LAST_CAR_MANUFACTURER, "")
+                    mSharedPrefHelper.put(LAST_CAR_MODEL, "")
                 }, {
                     mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })

@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.view.animation.AnimationUtils
 import android.widget.SearchView
 import com.margge.carchooser.Event
 import com.margge.carchooser.R
@@ -40,9 +41,14 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         binding.searchViewModel = mSearchViewModel
 
         searchEditText.setOnQueryTextListener(this)
+
+        val resId = R.anim.layout_animation_fall_down
+        val animation = AnimationUtils.loadLayoutAnimation(this, resId)
+
         dataRecyclerView.apply {
             layoutManager = mDataLayoutManager
             adapter = mDataAdapter
+            layoutAnimation = animation
         }
 
         mSearchViewModel.getData(mDataType)
@@ -68,17 +74,32 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
             when (event?.name) {
 
-                Event.EventsType.DataLoaded ->
+                Event.EventsType.DataLoaded -> {
                     mDataAdapter.addAll(event.data as List<Pair<String, String>>)
+                    runLayoutAnimation()
+                }
 
                 Event.EventsType.SelectedItem -> {
                     val selectedData: Pair<String, String> = event.data as Pair<String, String>
                     mSearchViewModel.saveSelectedData(mDataType, selectedData)
                     launchActivity<MainActivity>()
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 }
 
-                Event.EventsType.ConnectionError -> showToast(getString(R.string.server_error))
+                Event.EventsType.ConnectionError ->
+                    showToast(getString(R.string.server_error))
             }
         })
+    }
+
+    private fun runLayoutAnimation() {
+        val context = dataRecyclerView.context
+        val controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down)
+
+        dataRecyclerView.apply {
+            layoutAnimation = controller
+            adapter.notifyDataSetChanged()
+            scheduleLayoutAnimation()
+        }
     }
 }

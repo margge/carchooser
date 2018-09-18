@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, SearchActivity::class.java)
                     intent.putExtra(DATA, event.data as String)
                     startActivity(intent)
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 }
 
                 Event.EventsType.ConnectionError ->

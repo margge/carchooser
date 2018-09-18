@@ -7,6 +7,7 @@ import com.margge.carchooser.helpers.SharedPrefHelper
 import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_CAR_MANUFACTURER
 import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_CAR_MODEL
 import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_CAR_YEAR
+import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_SEARCHES
 import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_SELECTED_CAR
 import com.margge.services.CarChooserApiService
 import javax.inject.Inject
@@ -23,6 +24,7 @@ class CarChooserApplication : Application() {
                 .build()
                 .inject(this)
 
+        mSharedPrefHelper.put(LAST_SEARCHES, "")
         mSharedPrefHelper.put(LAST_SELECTED_CAR, "")
         mSharedPrefHelper.put(LAST_CAR_MANUFACTURER, "")
         mSharedPrefHelper.put(LAST_CAR_MODEL, "")
