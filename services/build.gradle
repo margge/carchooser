@@ -27,7 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$test_runner"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
 
@@ -48,5 +48,5 @@ dependencies {
     //Gson
     compile "com.google.code.gson:gson:$gson_version"
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "com.android.support:appcompat-v7:$support_app_compat_version"
 }
