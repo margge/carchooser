@@ -53,7 +53,8 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded, result.manufacturersMap.toList()))
+                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
+                            result.manufacturersMap.toList().sortedBy { it.second }))
                 }, {
                     mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })
@@ -64,7 +65,8 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded, result.mainTypesMap.toList()))
+                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
+                            result.mainTypesMap.toList().sortedBy { it.second }))
                 }, {
                     mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })
@@ -75,7 +77,8 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded, result.buildDateMap.toList()))
+                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
+                            result.buildDateMap.toList().sortedBy { it.second }))
                 }, {
                     mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })
@@ -98,7 +101,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
                 mSharedPrefHelper.put(SharedPrefHelper.LAST_SEARCHES, mSharedPrefHelper[LAST_SELECTED_CAR, ""] +
                         "${mSharedPrefHelper[SharedPrefHelper.LAST_SEARCHES, ""]} \n")
 
-                mSharedPrefHelper.put(LAST_SELECTED_CAR, "Car: \n ${mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""]}, " +
+                mSharedPrefHelper.put(LAST_SELECTED_CAR, "${mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""]}, " +
                         "${mSharedPrefHelper[LAST_CAR_MODEL, ""]}, " +
                         "${mSharedPrefHelper[LAST_CAR_YEAR, ""]} \n")
             }

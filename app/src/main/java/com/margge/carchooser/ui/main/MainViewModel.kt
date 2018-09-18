@@ -29,6 +29,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val mMainViewEvents: MutableLiveData<Event> = MutableLiveData()
     val mLastSelectedCar = ObservableField("")
     val mLastSearches = ObservableField("")
+    val visibleModel = ObservableField(false)
+    val visibleYear = ObservableField(false)
+    val visibleSelectedCar = ObservableField(false)
+    val visiblePreviousSearches = ObservableField(false)
 
     init {
         DaggerMainVMComponent.builder()
@@ -40,26 +44,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getCarManufacturers() =
             mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_MANUFACTURER))
 
-    fun getCarModels() {
-        if (mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""].isEmpty())
-            mMainViewEvents.postValue(Event(Event.EventsType.MissingValue, CAR_MANUFACTURER))
-        else
+    fun getCarModels() =
             mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_MODEL))
-    }
 
-    fun getCarYears() {
-        when {
-            mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""].isEmpty() ->
-                mMainViewEvents.postValue(Event(Event.EventsType.MissingValue, CAR_MANUFACTURER))
-            mSharedPrefHelper[LAST_CAR_MODEL, ""].isEmpty() ->
-                mMainViewEvents.postValue(Event(Event.EventsType.MissingValue, CAR_MODEL))
-            else ->
-                mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_YEAR))
-        }
-    }
+    fun getCarYears() =
+            mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_YEAR))
+
 
     fun refreshRecentSearches() {
-        mLastSearches.set(mSharedPrefHelper[LAST_SEARCHES, ""])
-        mLastSelectedCar.set(mSharedPrefHelper[LAST_SELECTED_CAR, ""])
+        visibleModel.set(mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""].isNotEmpty())
+        visibleYear.set(mSharedPrefHelper[LAST_CAR_MODEL, ""].isNotEmpty())
+
+        val lastSearches = mSharedPrefHelper[LAST_SEARCHES, ""]
+        mLastSearches.set(lastSearches)
+        visiblePreviousSearches.set(lastSearches.isNotEmpty())
+
+        val lastSelectedCar = mSharedPrefHelper[LAST_SELECTED_CAR, ""]
+        mLastSelectedCar.set(lastSelectedCar)
+        visibleSelectedCar.set(lastSelectedCar.isNotEmpty())
     }
 }

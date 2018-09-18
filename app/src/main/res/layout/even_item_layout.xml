@@ -14,31 +14,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{()->dataAdapterViewModel.showSelectedItem()}"
-        app:cardElevation="@dimen/double_line"
-        app:cardUseCompatPadding="true">
+        app:cardElevation="@dimen/double_line">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/smallest">
 
-            <ImageView
-                android:id="@+id/categoryImage"
-                android:layout_width="@dimen/icon_image_size"
-                android:layout_height="@dimen/icon_image_size"
-                android:layout_marginLeft="@dimen/smaller"
-                android:layout_marginStart="@dimen/smaller"
-                android:src="@drawable/ic_chevron_right" />
-
             <TextView
                 android:id="@+id/itemText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/largest"
                 android:layout_marginEnd="@dimen/smaller"
+                android:layout_marginLeft="@dimen/medium"
                 android:layout_marginRight="@dimen/smaller"
+                android:layout_marginStart="@dimen/medium"
                 android:ellipsize="end"
                 android:fontFamily="@font/raleway_medium"
+                android:gravity="center_vertical"
                 android:maxLines="1"
                 android:text="@{dataAdapterViewModel.itemText}"
                 android:textSize="@dimen/font_large"

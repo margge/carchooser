@@ -54,15 +54,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
 
-                Event.EventsType.MissingValue -> {
-                    when (event.data) {
-                        MainViewModel.CAR_MANUFACTURER ->
-                            showToast(getString(R.string.please_select_manufacturer))
-                        MainViewModel.CAR_MODEL ->
-                            showToast(getString(R.string.please_select_model))
-                    }
-                }
-
                 Event.EventsType.ConnectionError ->
                     showToast(getString(R.string.server_error))
             }

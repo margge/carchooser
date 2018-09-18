@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="mainViewModel"
             type="com.margge.carchooser.ui.main.MainViewModel" />
@@ -17,7 +19,10 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/small"
+            android:layout_marginRight="@dimen/small"
             android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
@@ -33,7 +38,7 @@
             <Button
                 android:id="@+id/manufacturesButton"
                 style="@style/CarChooserButton"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/main_button_width_landscape"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:layout_marginStart="@dimen/margin_medium"
@@ -44,32 +49,47 @@
             <Button
                 android:id="@+id/modelsButton"
                 style="@style/CarChooserButton"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/main_button_width_landscape"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/tiny"
                 android:onClick="@{()->mainViewModel.getCarModels()}"
-                android:text="@string/model" />
+                android:text="@string/model"
+                android:visibility="@{mainViewModel.visibleModel ? View.VISIBLE : View.GONE}" />
 
             <Button
                 android:id="@+id/yearsButton"
                 style="@style/CarChooserButton"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/main_button_width_landscape"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/tiny"
                 android:onClick="@{()->mainViewModel.getCarYears()}"
-                android:text="@string/year" />
+                android:text="@string/year"
+                android:visibility="@{mainViewModel.visibleYear ? View.VISIBLE : View.GONE}" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/small"
+            android:layout_marginRight="@dimen/small"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/selectedCarLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/selected_car"
+                android:textSize="@dimen/font_normal"
+                android:visibility="@{mainViewModel.visibleSelectedCar ? View.VISIBLE : View.GONE}"
+                tools:text="Selected car:" />
 
             <TextView
                 android:id="@+id/selectedCar"
@@ -80,6 +100,17 @@
                 android:text="@{mainViewModel.mLastSelectedCar}"
                 android:textSize="@dimen/font_medium"
                 tools:text="Citroen, 2 CV, 1984" />
+
+            <TextView
+                android:id="@+id/previousSearchesLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/previous_searches"
+                android:textSize="@dimen/font_normal"
+                android:visibility="@{mainViewModel.visiblePreviousSearches ? View.VISIBLE : View.GONE}"
+                tools:text="Previous searches:" />
 
             <ScrollView
                 android:layout_width="match_parent"
