@@ -25,10 +25,10 @@ import javax.inject.Inject
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
-    @Inject lateinit var mSharedPrefHelper: SharedPrefHelper
+    @Inject lateinit var sharedPrefHelper: SharedPrefHelper
 
-    val mSearchViewEvents: MutableLiveData<Event> = MutableLiveData()
-    private val mCarChooserRepository: CarChooserApiService by lazy { (application as CarChooserApplication).carChooserApiService }
+    val searchViewEvents: MutableLiveData<Event> = MutableLiveData()
+    private val carChooserRepository: CarChooserApiService by lazy { (application as CarChooserApplication).carChooserApiService }
 
     init {
         DaggerSearchVMComponent.builder()
@@ -42,71 +42,71 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             CAR_MANUFACTURER ->
                 getManufacturers()
             CAR_MODEL ->
-                getModels(mSharedPrefHelper[LAST_CAR_MANUFACTURER_ID, ""])
+                getModels(sharedPrefHelper[LAST_CAR_MANUFACTURER_ID, ""])
             CAR_YEAR ->
-                getYears(mSharedPrefHelper[LAST_CAR_MANUFACTURER_ID, ""], mSharedPrefHelper[LAST_CAR_MODEL_ID, ""])
+                getYears(sharedPrefHelper[LAST_CAR_MANUFACTURER_ID, ""], sharedPrefHelper[LAST_CAR_MODEL_ID, ""])
         }
     }
 
     private fun getManufacturers() {
-        mCarChooserRepository.getManufacturers()
+        carChooserRepository.getManufacturers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
+                    searchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
                             result.manufacturersMap.toList().sortedBy { it.second }))
 
-                    mSharedPrefHelper.put(LAST_CAR_MANUFACTURER, "")
-                    mSharedPrefHelper.put(LAST_CAR_MODEL, "")
+                    sharedPrefHelper.put(LAST_CAR_MANUFACTURER, "")
+                    sharedPrefHelper.put(LAST_CAR_MODEL, "")
                 }, {
-                    mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
+                    searchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })
     }
 
     private fun getModels(manufacturer: String) {
-        mCarChooserRepository.getMainTypes(manufacturer = manufacturer)
+        carChooserRepository.getMainTypes(manufacturer = manufacturer)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
+                    searchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
                             result.mainTypesMap.toList().sortedBy { it.second }))
                 }, {
-                    mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
+                    searchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })
     }
 
     private fun getYears(manufacturer: String, model: String) {
-        mCarChooserRepository.getBuildDates(manufacturer = manufacturer, mainType = model)
+        carChooserRepository.getBuildDates(manufacturer = manufacturer, mainType = model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result ->
-                    mSearchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
+                    searchViewEvents.postValue(Event(Event.EventsType.DataLoaded,
                             result.buildDateMap.toList().sortedBy { it.second }))
                 }, {
-                    mSearchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
+                    searchViewEvents.postValue(Event(Event.EventsType.ConnectionError))
                 })
     }
 
     fun saveSelectedData(dataType: String, selectedData: Pair<String, String>) {
         when (dataType) {
             CAR_MANUFACTURER -> {
-                mSharedPrefHelper.put(LAST_CAR_MANUFACTURER_ID, selectedData.first)
-                mSharedPrefHelper.put(LAST_CAR_MANUFACTURER, selectedData.second)
+                sharedPrefHelper.put(LAST_CAR_MANUFACTURER_ID, selectedData.first)
+                sharedPrefHelper.put(LAST_CAR_MANUFACTURER, selectedData.second)
             }
             CAR_MODEL -> {
-                mSharedPrefHelper.put(LAST_CAR_MODEL_ID, selectedData.first)
-                mSharedPrefHelper.put(LAST_CAR_MODEL, selectedData.second)
+                sharedPrefHelper.put(LAST_CAR_MODEL_ID, selectedData.first)
+                sharedPrefHelper.put(LAST_CAR_MODEL, selectedData.second)
             }
             CAR_YEAR -> {
-                mSharedPrefHelper.put(LAST_CAR_YEAR_ID, selectedData.first)
-                mSharedPrefHelper.put(LAST_CAR_YEAR, selectedData.second)
+                sharedPrefHelper.put(LAST_CAR_YEAR_ID, selectedData.first)
+                sharedPrefHelper.put(LAST_CAR_YEAR, selectedData.second)
 
-                mSharedPrefHelper.put(SharedPrefHelper.LAST_SEARCHES, mSharedPrefHelper[LAST_SELECTED_CAR, ""] +
-                        "${mSharedPrefHelper[SharedPrefHelper.LAST_SEARCHES, ""]} \n")
+                sharedPrefHelper.put(SharedPrefHelper.LAST_SEARCHES, sharedPrefHelper[LAST_SELECTED_CAR, ""] +
+                        "${sharedPrefHelper[SharedPrefHelper.LAST_SEARCHES, ""]} \n")
 
-                mSharedPrefHelper.put(LAST_SELECTED_CAR, "${mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""]}, " +
-                        "${mSharedPrefHelper[LAST_CAR_MODEL, ""]}, " +
-                        "${mSharedPrefHelper[LAST_CAR_YEAR, ""]} \n")
+                sharedPrefHelper.put(LAST_SELECTED_CAR, "${sharedPrefHelper[LAST_CAR_MANUFACTURER, ""]}, " +
+                        "${sharedPrefHelper[LAST_CAR_MODEL, ""]}, " +
+                        "${sharedPrefHelper[LAST_CAR_YEAR, ""]} \n")
             }
         }
     }

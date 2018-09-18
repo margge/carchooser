@@ -16,7 +16,7 @@ class SharedPrefHelper @Inject constructor(private val mSharedPreferences: Share
         const val LAST_CAR_YEAR_ID = "lastCarYearId"
         const val LAST_CAR_YEAR = "lastCarYear"
         const val LAST_SELECTED_CAR = "lastSelectedCar"
-        const val LAST_SEARCHES = "mLastSearches"
+        const val LAST_SEARCHES = "lastSearches"
     }
 
     fun put(key: String, value: String) = mSharedPreferences.edit().putString(key, value).apply()

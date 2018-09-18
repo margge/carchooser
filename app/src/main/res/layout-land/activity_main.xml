@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/smaller"
                 android:fontFamily="@font/raleway_medium"
-                android:text="@{mainViewModel.mLastSelectedCar}"
+                android:text="@{mainViewModel.lastSelectedCar}"
                 android:textSize="@dimen/font_medium"
                 tools:text="Citroen, 2 CV, 1984" />
 
@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:text="@{mainViewModel.mLastSearches}"
+                    android:text="@{mainViewModel.lastSearches}"
                     tools:text="Car: Citroen, 2 CV, 1984" />
 
             </ScrollView>

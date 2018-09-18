@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var mMainViewModel: MainViewModel
+    @Inject lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,23 +28,23 @@ class MainActivity : AppCompatActivity() {
                 .inject(this@MainActivity)
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        binding.mainViewModel = mMainViewModel
+        binding.mainViewModel = mainViewModel
 
         subscribeViewModelEvents()
     }
 
     override fun onResume() {
         super.onResume()
-        mMainViewModel.refreshRecentSearches()
+        mainViewModel.refreshRecentSearches()
     }
 
     override fun onDestroy() {
-        mMainViewModel.mMainViewEvents.removeObservers(this)
+        mainViewModel.mainViewEvents.removeObservers(this)
         super.onDestroy()
     }
 
     private fun subscribeViewModelEvents() {
-        mMainViewModel.mMainViewEvents.observe(this, Observer<Event> { event: Event? ->
+        mainViewModel.mainViewEvents.observe(this, Observer<Event> { event: Event? ->
 
             when (event?.name) {
 

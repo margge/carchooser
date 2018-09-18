@@ -22,11 +22,11 @@ import javax.inject.Inject
 
 class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
-    @Inject lateinit var mSearchViewModel: SearchViewModel
+    @Inject lateinit var searchViewModel: SearchViewModel
 
-    private val mDataAdapter by lazy { DataAdapter(this, mSearchViewModel.mSearchViewEvents) }
-    private val mDataLayoutManager by lazy { LinearLayoutManager(this) }
-    private val mDataType by lazy { intent.getStringExtra(DATA) }
+    private val dataAdapter by lazy { DataAdapter(this, searchViewModel.searchViewEvents) }
+    private val dataLayoutManager by lazy { LinearLayoutManager(this) }
+    private val dataType by lazy { intent.getStringExtra(DATA) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 .inject(this@SearchActivity)
 
         val binding = DataBindingUtil.setContentView<ActivitySearchBinding>(this, R.layout.activity_search)
-        binding.searchViewModel = mSearchViewModel
+        binding.searchViewModel = searchViewModel
 
         searchEditText.setOnQueryTextListener(this)
 
@@ -46,17 +46,17 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val animation = AnimationUtils.loadLayoutAnimation(this, resId)
 
         dataRecyclerView.apply {
-            layoutManager = mDataLayoutManager
-            adapter = mDataAdapter
+            layoutManager = dataLayoutManager
+            adapter = dataAdapter
             layoutAnimation = animation
         }
 
-        mSearchViewModel.getData(mDataType)
+        searchViewModel.getData(dataType)
         subscribeViewModelEvents()
     }
 
     override fun onDestroy() {
-        mSearchViewModel.mSearchViewEvents.removeObservers(this)
+        searchViewModel.searchViewEvents.removeObservers(this)
         super.onDestroy()
     }
 
@@ -65,23 +65,23 @@ class SearchActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(query: String): Boolean {
-        mDataAdapter.filter.filter(query)
+        dataAdapter.filter.filter(query)
         return true
     }
 
     private fun subscribeViewModelEvents() {
-        mSearchViewModel.mSearchViewEvents.observe(this, Observer<Event> { event: Event? ->
+        searchViewModel.searchViewEvents.observe(this, Observer<Event> { event: Event? ->
 
             when (event?.name) {
 
                 Event.EventsType.DataLoaded -> {
-                    mDataAdapter.addAll(event.data as List<Pair<String, String>>)
+                    dataAdapter.addAll(event.data as List<Pair<String, String>>)
                     runLayoutAnimation()
                 }
 
                 Event.EventsType.SelectedItem -> {
                     val selectedData: Pair<String, String> = event.data as Pair<String, String>
-                    mSearchViewModel.saveSelectedData(mDataType, selectedData)
+                    searchViewModel.saveSelectedData(dataType, selectedData)
                     launchActivity<MainActivity>()
                     overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
                 }
