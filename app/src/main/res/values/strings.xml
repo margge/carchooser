@@ -5,4 +5,6 @@
     <string name="model">Model</string>
     <string name="year">Year</string>
     <string name="please_select_the_manufacturer_model_year">Please select the manufacturer, model and year to see a car</string>
+    <string name="please_select_manufacturer">Please select a manufacturer</string>
+    <string name="please_select_model">Please select a model</string>
 </resources>

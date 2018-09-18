@@ -7,6 +7,8 @@ import android.databinding.ObservableField
 import com.margge.carchooser.Event
 import com.margge.carchooser.base.CarChooserApplication
 import com.margge.carchooser.helpers.SharedPrefHelper
+import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_CAR_MANUFACTURER
+import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_CAR_MODEL
 import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_SEARCHES
 import com.margge.carchooser.helpers.SharedPrefHelper.Companion.LAST_SELECTED_CAR
 import com.margge.carchooser.ui.main.injection.DaggerMainVMComponent
@@ -38,11 +40,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun getCarManufacturers() =
             mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_MANUFACTURER))
 
-    fun getCarModels() =
+    fun getCarModels() {
+        if (mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""].isEmpty())
+            mMainViewEvents.postValue(Event(Event.EventsType.MissingValue, CAR_MANUFACTURER))
+        else
             mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_MODEL))
+    }
 
-    fun getCarYears() =
-            mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_YEAR))
+    fun getCarYears() {
+        when {
+            mSharedPrefHelper[LAST_CAR_MANUFACTURER, ""].isEmpty() ->
+                mMainViewEvents.postValue(Event(Event.EventsType.MissingValue, CAR_MANUFACTURER))
+            mSharedPrefHelper[LAST_CAR_MODEL, ""].isEmpty() ->
+                mMainViewEvents.postValue(Event(Event.EventsType.MissingValue, CAR_MODEL))
+            else ->
+                mMainViewEvents.postValue(Event(Event.EventsType.GetData, CAR_YEAR))
+        }
+    }
 
     fun refreshRecentSearches() {
         mLastSearches.set(mSharedPrefHelper[LAST_SEARCHES, ""])
